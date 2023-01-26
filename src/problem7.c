@@ -1,13 +1,4 @@
-#include <stdbool.h>
-
-bool is_prime(long n) {
-    for (int i=2; i <= n/2; i++) {
-        if (n % i == 0)
-            return false;
-    }
-
-    return true;
-}
+#include "primes.h"
 
 long problem7() {
     int count = 0;
@@ -18,5 +9,6 @@ long problem7() {
         if (is_prime(n))
             count++;
     }
+
     return n;
 }
