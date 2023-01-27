@@ -135,8 +135,7 @@ struct Dict {
     Node *root;
 };
 
-Node *NODE_NOT_FOUND = NULL;
-void *KEY_NOT_FOUND = NULL;
+void *DICT_KEY_NOT_FOUND = NULL;
 
 Dict *dict_create() {
     Dict *dict = calloc(1, sizeof(Dict));
@@ -147,20 +146,6 @@ Dict *dict_create() {
 void dict_destroy(Dict *dict) {
     node_destroy(dict->root);
     freen(dict);
-}
-
-Node *dict_get_node(Dict *dict, char *key) {
-    int length = strlen(key);
-    Node *node = dict->root;
-
-    for (int i=0; i<length; i++) {
-        char c = key[i];
-        node = node_get_child(node, c);
-        if (node == CHILD_NOT_FOUND)
-            return NODE_NOT_FOUND;
-    }
-
-    return node;
 }
 
 void dict_set(Dict *dict, char *key, void *value) {
@@ -174,23 +159,29 @@ void dict_set(Dict *dict, char *key, void *value) {
             child = node_create(c, NULL);
             node_add_child(node, child);
         }
+        node = child;
     }
     node_set_value(child, value);
 }
 
 void *dict_get(Dict *dict, char *key) {
-    Node *node = dict_get_node(dict, key);
+    int length = strlen(key);
+    Node *node = dict->root;
 
-    if (node == NODE_NOT_FOUND)
-        return KEY_NOT_FOUND;
+    for (int i=0; i<length; i++) {
+        char c = key[i];
+        node = node_get_child(node, c);
+        if (node == CHILD_NOT_FOUND)
+            return DICT_KEY_NOT_FOUND;
+    }
 
     return node->value;
 }
 
 void dict_test_set_get() {
     Dict *dict = dict_create();
-    dict_set(dict, "a", "b");
-    assert(streq(dict_get(dict, "a"), "b"));
+    dict_set(dict, "blargh", "honk");
+    assert(streq(dict_get(dict, "blargh"), "honk"));
     dict_destroy(dict);
 }
 
@@ -205,4 +196,5 @@ void dict_test_replace() {
 void dict_test() {
     node_test();
     dict_test_set_get();
+    dict_test_replace();
 }
