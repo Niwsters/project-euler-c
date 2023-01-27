@@ -7,8 +7,6 @@
 
 typedef struct Node Node;
 
-Node *CHILD_NOT_FOUND = NULL;
-
 struct Node {
     char key;
     void *value;
@@ -64,7 +62,7 @@ Node *node_get_child(Node *node, char key) {
             return child;
     }
     
-    return CHILD_NOT_FOUND;
+    return NULL;
 }
 
 void node_set_value(Node *node, void *value) {
@@ -135,8 +133,6 @@ struct Dict {
     Node *root;
 };
 
-void *DICT_KEY_NOT_FOUND = NULL;
-
 Dict *dict_create() {
     Dict *dict = calloc(1, sizeof(Dict));
     dict->root = node_create('\0', NULL);
@@ -155,7 +151,7 @@ void dict_set(Dict *dict, char *key, void *value) {
     for (int i=0; i<length; i++) {
         char c = key[i];
         child = node_get_child(node, c);
-        if (child == CHILD_NOT_FOUND) {
+        if (child == NULL) {
             child = node_create(c, NULL);
             node_add_child(node, child);
         }
@@ -171,8 +167,8 @@ void *dict_get(Dict *dict, char *key) {
     for (int i=0; i<length; i++) {
         char c = key[i];
         node = node_get_child(node, c);
-        if (node == CHILD_NOT_FOUND)
-            return DICT_KEY_NOT_FOUND;
+        if (node == NULL)
+            return NULL;
     }
 
     return node->value;
@@ -187,9 +183,9 @@ void dict_test_set_get() {
 
 void dict_test_replace() {
     Dict *dict = dict_create();
-    dict_set(dict, "a", "b");
-    dict_set(dict, "a", "c");
-    assert(streq(dict_get(dict, "a"), "c"));
+    dict_set(dict, "blargh", "oh hi");
+    dict_set(dict, "blargh", ":D");
+    assert(streq(dict_get(dict, "blargh"), ":D"));
     dict_destroy(dict);
 }
 
