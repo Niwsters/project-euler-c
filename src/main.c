@@ -5,6 +5,8 @@
 #include <string.h>
 
 #include "primes.h"
+#include "util.h"
+#include "dict.h"
 
 #include "problem1.h"
 #include "problem2.h"
@@ -16,11 +18,15 @@
 #include "problem8.h"
 #include "problem9.h"
 #include "problem10.h"
+#include "problem11.h"
 
-int main() {
+int main(int argc, char **argv) {
     primes_init();
 
-    primes_test();
+    if (argc > 1 && streq(argv[1], "--test")) {
+        primes_test();
+        dict_test();
+    }
 
     /*
     printf("Problem 1: %li\n", problem1());
@@ -32,8 +38,9 @@ int main() {
     printf("Problem 7: %li\n", problem7());
     printf("Problem 8: %li\n", problem8());
     printf("Problem 9: %li\n", problem9());
-    */
     printf("Problem 10: %li\n", problem10());
+    */
+    printf("Problem 11: %li\n", problem11());
 
     primes_exit();
 

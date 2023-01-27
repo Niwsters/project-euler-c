@@ -10,6 +10,11 @@ build-sanitize:
 run:
 	./bin/program
 
+run-test:
+	./bin/program --test
+
+test: build-sanitize run-test
+
 dev: build-sanitize run
 
 profile: build-profile run
