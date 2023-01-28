@@ -27,7 +27,6 @@ int main(int argc, char **argv) {
         primes_test();
         dict_test();
     } else {
-        /*
         printf("Problem 1: %li\n", problem1());
         printf("Problem 2: %li\n", problem2());
         printf("Problem 3: %li\n", problem3());
@@ -38,7 +37,6 @@ int main(int argc, char **argv) {
         printf("Problem 8: %li\n", problem8());
         printf("Problem 9: %li\n", problem9());
         printf("Problem 10: %li\n", problem10());
-        */
         printf("Problem 11: %li\n", problem11());
     }
 
