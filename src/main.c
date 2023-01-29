@@ -6,8 +6,10 @@
 
 #include "primes.h"
 #include "util.h"
+#include "node.h"
 #include "dict.h"
 #include "list.h"
+#include "set.h"
 
 #include "problem1.h"
 #include "problem2.h"
@@ -27,6 +29,8 @@ int main(int argc, char **argv) {
         primes_test();
         dict_test();
         list_test();
+        node_test();
+        set_test();
     } else {
         /*
         printf("Problem 1: %li\n", problem1());

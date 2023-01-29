@@ -41,6 +41,7 @@ Primes *FOUND_PRIMES;
 struct Primes {
     Prime *root;
     Prime *end;
+    size_t highest_prime;
 };
 
 void primes_destroy(Primes *primes) {
@@ -52,13 +53,17 @@ Primes *primes_create() {
     Primes *primes = calloc(1, sizeof(Primes));
     primes->root = prime_create(2);
     primes->end = primes->root;
+    primes->highest_prime = 2;
     return primes;
 }
 
-void primes_add(Primes *primes, unsigned int n) {
+void primes_add(Primes *primes, unsigned long n) {
     Prime *prime = prime_create(n);
     primes->end->next = prime;
     primes->end = prime;
+
+    if (prime->value > primes->highest_prime)
+        primes->highest_prime = prime->value;
 }
 
 void primes_exit() {
@@ -73,11 +78,37 @@ void primes_ensure_init() {
     }
 }
 
+void primes_find_until(unsigned long n) {
+    bool is_prime[n];
+    for (size_t i=0; i<n; i++) {
+        is_prime[i] = true;
+    }
+
+    unsigned long n_sqrt = sqrt(n);
+    for (unsigned long i=3; i<n_sqrt; i++) {
+        if (is_prime[i]) {
+            unsigned long j = pow(i, 2);
+            unsigned long k = 0;
+            while (j < n) {
+                is_prime[j] = false;
+                j = pow(i, 2) + k*i;
+                k++;
+            }
+        }
+    }
+
+    for (size_t i=3; i<n; i++) {
+        if (is_prime[i])
+            primes_add(FOUND_PRIMES, i);
+    }
+}
+
 bool is_prime(long n) {
     primes_ensure_init();
 
-    if (n == 2)
-        return true;
+    if (pow(FOUND_PRIMES->highest_prime, 2) <= n) {
+        primes_find_until(n);
+    }
 
     Prime *prime = FOUND_PRIMES->root;
     while (prime != NULL && pow(prime->value, 2) <= n) {
@@ -87,12 +118,11 @@ bool is_prime(long n) {
         prime = prime->next;
     }
 
-    primes_add(FOUND_PRIMES, n);
-
     return true;
 }
 
 void primes_test() {
+    assert(is_prime(21) == false);
     assert(is_prime(2) == true);
     assert(is_prime(3) == true);
     assert(is_prime(4) == false);
