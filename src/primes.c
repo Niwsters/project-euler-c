@@ -5,6 +5,7 @@
 #include <math.h>
 
 #include "util.h"
+#include "list.h"
 
 bool INITIALIZED = false;
 
@@ -79,13 +80,16 @@ void primes_ensure_init() {
 }
 
 void primes_find_until(unsigned long n) {
+    if (FOUND_PRIMES->highest_prime >= n)
+        return;
+
     bool is_prime[n];
     for (size_t i=0; i<n; i++) {
         is_prime[i] = true;
     }
 
     unsigned long n_sqrt = sqrt(n);
-    for (unsigned long i=3; i<n_sqrt; i++) {
+    for (unsigned long i=2; i<n_sqrt; i++) {
         if (is_prime[i]) {
             unsigned long j = pow(i, 2);
             unsigned long k = 0;
@@ -107,7 +111,7 @@ bool is_prime(long n) {
     primes_ensure_init();
 
     if (pow(FOUND_PRIMES->highest_prime, 2) <= n) {
-        primes_find_until(n);
+        primes_find_until(sqrt(n));
     }
 
     Prime *prime = FOUND_PRIMES->root;
@@ -121,7 +125,22 @@ bool is_prime(long n) {
     return true;
 }
 
-void primes_test() {
+List *prime_find_factors(unsigned long n) {
+    List *factors = list_create();
+
+    primes_find_until(n / 2);
+
+    Prime *prime = FOUND_PRIMES->root;
+    while (prime != NULL) {
+        if (n % prime->value == 0)
+            list_add(factors, (void*) prime->value);
+        prime = prime->next;
+    }
+
+    return factors;
+}
+
+void primes_test_is_prime() {
     assert(is_prime(21) == false);
     assert(is_prime(2) == true);
     assert(is_prime(3) == true);
@@ -132,4 +151,16 @@ void primes_test() {
     assert(is_prime(13) == true);
     assert(is_prime(17) == true);
     assert(is_prime(18) == false);
+}
+
+void primes_test_find_factors() {
+    List *factors = prime_find_factors(28);
+    assert((long) list_get(factors, 0) == 2);
+    assert((long) list_get(factors, 1) == 7);
+    list_destroy(factors);
+}
+
+void primes_test() {
+    primes_test_is_prime();
+    primes_test_find_factors();
 }
