@@ -1,10 +1,19 @@
 #include <stdio.h>
 
-long count_divisors(long n) {
-    long count = 1;
-    for (long i=1; i<=n/2; i++) {
-        if (n % i == 0)
-            count++;
+#include "primes.h"
+
+unsigned long count_divisors(unsigned long n) {
+    List *factors = primes_find_factors(n);
+
+    unsigned long count = 0;
+    while (n > 1) {
+        for (size_t i=0; i<list_count(factors); i++) {
+            unsigned long prime = (unsigned long) list_get(factors, i);
+            if (n % prime == 0) {
+                count++;
+                n = n / prime;
+            }
+        }
     }
     return count;
 }

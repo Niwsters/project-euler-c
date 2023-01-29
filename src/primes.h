@@ -7,6 +7,6 @@
 
 bool is_prime(long n);
 void primes_test();
-List *prime_find_factors(unsigned long n);
+List *primes_find_factors(unsigned long n);
 
 #endif

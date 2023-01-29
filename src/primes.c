@@ -125,10 +125,12 @@ bool is_prime(long n) {
     return true;
 }
 
-List *prime_find_factors(unsigned long n) {
+List *primes_find_factors(unsigned long n) {
+    primes_ensure_init();
+
     List *factors = list_create();
 
-    primes_find_until(n / 2);
+    primes_find_until(n+1);
 
     Prime *prime = FOUND_PRIMES->root;
     while (prime != NULL) {
@@ -154,7 +156,7 @@ void primes_test_is_prime() {
 }
 
 void primes_test_find_factors() {
-    List *factors = prime_find_factors(28);
+    List *factors = primes_find_factors(28);
     assert((long) list_get(factors, 0) == 2);
     assert((long) list_get(factors, 1) == 7);
     list_destroy(factors);
