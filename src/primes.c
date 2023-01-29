@@ -6,6 +6,8 @@
 
 #include "util.h"
 
+bool INITIALIZED = false;
+
 typedef struct Prime Prime;
 
 struct Prime {
@@ -32,14 +34,19 @@ void prime_destroy(Prime *prime) {
 
 
 
-
-
 typedef struct Primes Primes;
+
+Primes *FOUND_PRIMES;
 
 struct Primes {
     Prime *root;
     Prime *end;
 };
+
+void primes_destroy(Primes *primes) {
+    prime_destroy(primes->root);
+    freen(primes);
+}
 
 Primes *primes_create() {
     Primes *primes = calloc(1, sizeof(Primes));
@@ -48,32 +55,27 @@ Primes *primes_create() {
     return primes;
 }
 
-void primes_destroy(Primes *primes) {
-    prime_destroy(primes->root);
-    freen(primes);
-}
-
 void primes_add(Primes *primes, unsigned int n) {
     Prime *prime = prime_create(n);
     primes->end->next = prime;
     primes->end = prime;
 }
 
-
-
-
-
-Primes *FOUND_PRIMES;
-
-void primes_init() {
-    FOUND_PRIMES = primes_create();
-}
-
 void primes_exit() {
     primes_destroy(FOUND_PRIMES);
 }
 
+void primes_ensure_init() {
+    if (!INITIALIZED) {
+        FOUND_PRIMES = primes_create();
+        atexit(primes_exit);
+        INITIALIZED = true;
+    }
+}
+
 bool is_prime(long n) {
+    primes_ensure_init();
+
     if (n == 2)
         return true;
 

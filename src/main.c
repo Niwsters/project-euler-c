@@ -7,6 +7,7 @@
 #include "primes.h"
 #include "util.h"
 #include "dict.h"
+#include "list.h"
 
 #include "problem1.h"
 #include "problem2.h"
@@ -19,14 +20,15 @@
 #include "problem9.h"
 #include "problem10.h"
 #include "problem11.h"
+#include "problem12.h"
 
 int main(int argc, char **argv) {
-    primes_init();
-
     if (argc > 1 && streq(argv[1], "--test")) {
         primes_test();
         dict_test();
+        list_test();
     } else {
+        /*
         printf("Problem 1: %li\n", problem1());
         printf("Problem 2: %li\n", problem2());
         printf("Problem 3: %li\n", problem3());
@@ -38,9 +40,9 @@ int main(int argc, char **argv) {
         printf("Problem 9: %li\n", problem9());
         printf("Problem 10: %li\n", problem10());
         printf("Problem 11: %li\n", problem11());
+        */
+        printf("Problem 12: %li\n", problem12());
     }
-
-    primes_exit();
 
     return EXIT_SUCCESS;
 }

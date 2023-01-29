@@ -1,3 +1,6 @@
+#ifndef DICT_H
+#define DICT_H
+
 #include <stdlib.h>
 
 void dict_test();
@@ -6,3 +9,5 @@ Dict *dict_create();
 void dict_set(Dict *dict, char *key, void *value);
 void *dict_get(Dict *dict, char *key);
 void dict_destroy(Dict *dict);
+
+#endif
