@@ -17,9 +17,7 @@ long problem12() {
     while (divisors < 500) {
         triangle += i++;
         divisors = count_divisors(triangle);
-        if (divisors > 500)
-            return triangle;
     }
 
-    return 0;
+    return triangle;
 }
