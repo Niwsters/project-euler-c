@@ -1,8 +1,8 @@
 #include <math.h>
 
 unsigned long count_divisors(unsigned long n) {
-    long count = 0;
-    for (long i=1; i<=sqrt(n); i++) {
+    unsigned long count = 0;
+    for (unsigned long i=1; i<=sqrt(n); i++) {
         if (n % i == 0)
             count += 2;
     }
