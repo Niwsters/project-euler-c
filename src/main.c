@@ -23,6 +23,7 @@
 #include "problem10.h"
 #include "problem11.h"
 #include "problem12.h"
+#include "problem13.h"
 
 int main(int argc, char **argv) {
     if (argc > 1 && streq(argv[1], "--test")) {
@@ -44,8 +45,9 @@ int main(int argc, char **argv) {
         printf("Problem 9: %li\n", problem9());
         printf("Problem 10: %li\n", problem10());
         printf("Problem 11: %li\n", problem11());
-        */
         printf("Problem 12: %li\n", problem12());
+        */
+        printf("Problem 13: %li\n", problem13());
     }
 
     return EXIT_SUCCESS;

@@ -1,11 +1,11 @@
 build:
-	gcc ./src/*c -o ./bin/program -lm
+	gcc ./src/*c -o ./bin/program -lm -lgmp
 
 build-profile:
-	gcc ./src/*c -o ./bin/program -lm -pg
+	gcc ./src/*c -o ./bin/program -lm -pg -lgmp
 
 build-sanitize:
-	gcc ./src/*c -o ./bin/program -fsanitize=address -lm -pg
+	gcc ./src/*c -o ./bin/program -fsanitize=address -lm -pg -lgmp
 
 run:
 	./bin/program
