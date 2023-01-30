@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <math.h>
 
 unsigned long count_divisors(unsigned long n) {
