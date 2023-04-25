@@ -1,10 +1,10 @@
 srcs = $(wildcard src/*.c)
 progrs = $(patsubst src/%.c, bin/%, $(srcs))
-cflags = -fsanitize=address
+cflags = -fsanitize=address -lgmp
 
 all: $(progrs)
 %: src/%.c
-	gcc $(cflags) -o bin/$@ $<
+	gcc -o bin/$@ $< $(cflags)
 	./bin/$@ $<
 
 clean:
