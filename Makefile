@@ -1,3 +1,14 @@
+srcs = $(wildcard src/*.c)
+progrs = $(patsubst src/%.c, bin/%, $(srcs))
+
+all: $(progrs)
+%: src/%.c
+	$(CC) $(CFLAGS) -o bin/$@ $<
+	./bin/$@ $<
+
+clean:
+	rm -f $(progrs)
+
 build:
 	gcc ./src/*c -o ./bin/program -lm -lgmp
 

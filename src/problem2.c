@@ -1,4 +1,6 @@
-long problem2() {
+#include <stdio.h>
+
+int main() {
     int a = 1;
     int b = 1;
 
@@ -13,5 +15,7 @@ long problem2() {
         b = c;
         c = a + b;
     }
-    return sum;
+    printf("%i\n", sum);
+
+    return 0;
 }
