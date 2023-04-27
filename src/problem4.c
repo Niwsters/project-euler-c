@@ -30,3 +30,8 @@ long problem4() {
 
     return largest_palindrome;
 }
+
+int main() {
+    printf("%li\n", problem4());
+    return 0;
+}

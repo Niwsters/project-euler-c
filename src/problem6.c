@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 
 long problem6() {
     long squares = 0;
@@ -10,4 +11,9 @@ long problem6() {
     sum = pow(sum, 2);
 
     return sum - squares;
+}
+
+int main() {
+    printf("%li\n", problem6());
+    return 0;
 }

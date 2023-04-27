@@ -5,7 +5,7 @@
 #include <math.h>
 
 #include "util.h"
-#include "list.h"
+#include "list.c"
 
 bool INITIALIZED = false;
 

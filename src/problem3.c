@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 long next_prime(long n) {
     int i;
     for (i=3; i < n/2; i++) {
@@ -18,4 +20,9 @@ long problem3() {
     }
 
     return largest_prime;
+}
+
+int main() {
+    printf("%li\n", problem3());
+    return 0;
 }

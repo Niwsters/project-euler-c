@@ -1,7 +1,8 @@
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "util.c"
+#include "util.h"
 
 typedef struct List List;
 
@@ -47,7 +48,7 @@ size_t list_count(List *list) {
 void list_test_add_get() {
     List *list = list_create();
     list_add(list, "oh hi");
-    assert(streq(list_get(list, 0), "oh hi"));
+    assert(strcmp(list_get(list, 0), "oh hi") == 0);
     list_destroy(list);
 }
 
@@ -55,7 +56,7 @@ void list_test_add_twice() {
     List *list = list_create();
     list_add(list, "oh hi");
     list_add(list, ":D");
-    assert(streq(list_get(list, 1), ":D"));
+    assert(strcmp(list_get(list, 1), ":D") == 0);
     list_destroy(list);
 }
 

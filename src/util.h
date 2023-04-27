@@ -1,4 +1,5 @@
-#include <stdbool.h>
+#include <stdlib.h>
 
-void freen(void *x);
-bool streq(char *a, char *b);
+#ifndef freen
+#define freen(x) { while (x) { free(x); x = NULL; } }
+#endif

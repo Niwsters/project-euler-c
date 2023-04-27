@@ -117,3 +117,7 @@ long problem5() {
         pow(17, primes.seventeens) *
         pow(19, primes.nineteens);
 }
+
+int main() {
+    printf("%li\n", problem5());
+}
