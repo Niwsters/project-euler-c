@@ -70,10 +70,8 @@ void pyramid_print(Pyramid *pyramid) {
 }
 
 int main() {
-    pyramid_print(&pyramid);
     for (int row=2; row<ROWS; row++) {
         merge(&pyramid, pyramid, row);
-        pyramid_print(&pyramid);
     }
 
     int largest = 0;
