@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <math.h>
+#include <stdio.h>
 
 bool is_triplet(int a, int b, int c) {
     return pow(a, 2) + pow(b, 2) == pow(c, 2);
@@ -15,5 +16,10 @@ long problem9() {
         }
     }
 
+    return 0;
+}
+
+int main() {
+    printf("%li\n", problem9());
     return 0;
 }
