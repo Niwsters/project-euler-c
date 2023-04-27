@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 
 unsigned long count_divisors(unsigned long n) {
     unsigned long count = 0;
@@ -10,7 +11,7 @@ unsigned long count_divisors(unsigned long n) {
     return count;
 }
 
-long problem12() {
+int main() {
     long triangle = 0;
     long divisors = 0;
     long i = 1;
@@ -19,5 +20,5 @@ long problem12() {
         divisors = count_divisors(triangle);
     }
 
-    return triangle;
+    printf("%li\n", triangle);
 }

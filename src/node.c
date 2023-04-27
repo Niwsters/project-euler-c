@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #include "util.h"
 
@@ -82,7 +83,7 @@ void node_test_add_once() {
     node_add_child(node, child);
 
     assert(node->children[0]->key == 'b');
-    assert(streq(node->children[0]->value, "honk"));
+    assert(strcmp(node->children[0]->value, "honk") == 0);
 
     node_destroy(node);
 }
@@ -122,7 +123,7 @@ void node_test_get_node_by_key() {
 void node_test_set_value() {
     Node *node = node_create('a', "oh hi");
     node_set_value(node, ":D");
-    assert(streq(node_get_value(node), ":D"));
+    assert(strcmp(node_get_value(node), ":D") == 0);
     node_destroy(node);
 }
 

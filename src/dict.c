@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "util.h"
-#include "node.h"
+#include "node.c"
 
 typedef struct Dict Dict;
 
@@ -56,7 +56,7 @@ void *dict_get(Dict *dict, char *key) {
 void dict_test_set_get() {
     Dict *dict = dict_create();
     dict_set(dict, "blargh", "honk");
-    assert(streq(dict_get(dict, "blargh"), "honk"));
+    assert(strcmp(dict_get(dict, "blargh"), "honk") == 0);
     dict_destroy(dict);
 }
 
@@ -64,7 +64,7 @@ void dict_test_replace() {
     Dict *dict = dict_create();
     dict_set(dict, "blargh", "oh hi");
     dict_set(dict, "blargh", ":D");
-    assert(streq(dict_get(dict, "blargh"), ":D"));
+    assert(strcmp(dict_get(dict, "blargh"), ":D") == 0);
     dict_destroy(dict);
 }
 
