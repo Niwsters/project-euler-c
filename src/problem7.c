@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -15,6 +16,7 @@ void primes_init(Primes *primes) {
 }
 
 void primes_add(Primes *primes, size_t prime) {
+    assert(primes->length < MAX);
     primes->values[primes->length++] = prime;
 }
 
